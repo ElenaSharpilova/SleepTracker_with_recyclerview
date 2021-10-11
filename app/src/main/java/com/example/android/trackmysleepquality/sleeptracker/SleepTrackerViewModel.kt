@@ -11,9 +11,9 @@ import com.example.android.trackmysleepquality.formatNights
 import kotlinx.coroutines.*
 import androidx.lifecycle.viewModelScope
 
-class SleepTrackerViewModel(
-        val database: SleepDatabaseDao,
-        application: Application) : AndroidViewModel(application) {
+class SleepTrackerViewModel(val database: SleepDatabaseDao,
+    application: Application) : AndroidViewModel(application) {
+
     private var tonight = MutableLiveData<SleepNight?>()
 
     val nights = database.getAllNights()
@@ -76,11 +76,11 @@ class SleepTrackerViewModel(
 
     private suspend fun getTonightFromDatabase(): SleepNight? {
         //return withContext(Dispatchers.IO) {
-            var night = database.getTonight()
-            if (night?.endTimeMilli != night?.startTimeMilli) {
-                night = null
-            }
-            return night
+        var night = database.getTonight()
+        if (night?.endTimeMilli != night?.startTimeMilli) {
+            night = null
+        }
+        return night
         //}
     }
 
@@ -132,10 +132,9 @@ class SleepTrackerViewModel(
      * At this point, we want to cancel all coroutines;
      * otherwise we end up with processes that have nowhere to return to
      * using memory and resources.
-
     override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
+    super.onCleared()
+    viewModelJob.cancel()
     }
      */
 }

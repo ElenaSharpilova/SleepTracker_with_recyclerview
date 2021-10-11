@@ -14,6 +14,7 @@ class SleepNightAdapter(val clickListener: SleepNightListener) : ListAdapter<Sle
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
+
         holder.bind(clickListener,item)
     }
 
@@ -53,4 +54,3 @@ class SleepNightDiffCallback : DiffUtil.ItemCallback<SleepNight>() {
 class SleepNightListener(val clickListener: (sleepId: Long) -> Unit) {
     fun onClick(night: SleepNight) = clickListener(night.nightId)
 }
-
